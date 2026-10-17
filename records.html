@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records | AttendTrack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="dashboard-navbar">
+        <a href="dashboard.html" class="logo">AttendTrack</a>
+        <nav class="dashboard-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="attendance.html">Attendance</a>
+            <a href="students.html">Students</a>
+            <a href="records.html" class="active">Records</a>
+            <a href="reports.html">Reports</a>
+        </nav>
+        <a href="index.html" class="dashboard-logout">Logout</a>
+    </header>
+
+    <main class="page-container">
+        <div class="page-heading">
+            <div>
+                <h1>Attendance Records</h1>
+                <p>Search and review historical attendance.</p>
+            </div>
+        </div>
+
+        <section class="filter-panel">
+            <label for="recordDateFilter">Date</label>
+            <input type="date" id="recordDateFilter">
+            <input type="search" id="recordSearch"
+                   placeholder="Search records..." aria-label="Search records">
+        </section>
+
+        <section class="table-panel">
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Program</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsTableBody">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                No attendance records available.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="recordsMessage" role="status"></p>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

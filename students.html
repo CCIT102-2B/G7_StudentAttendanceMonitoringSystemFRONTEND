@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students | AttendTrack</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="dashboard-navbar">
+
+        <a href="dashboard.html" class="logo">
+            AttendTrack
+        </a>
+
+        <nav class="dashboard-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="attendance.html">Attendance</a>
+            <a href="students.html" class="active">Students</a>
+            <a href="records.html">Records</a>
+            <a href="reports.html">Reports</a>
+        </nav>
+
+        <a href="index.html" class="dashboard-logout">
+            Logout
+        </a>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="page-container">
+
+        <!-- PAGE HEADING -->
+        <section class="page-heading">
+
+            <div>
+                <h1>Students</h1>
+                <p>
+                    Manage student information and enrollment details.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                id="addStudentBtn"
+                class="primary-button">
+
+                + Add Student
+
+            </button>
+
+        </section>
+
+
+        <!-- STUDENT TABLE -->
+        <section class="table-panel">
+
+            <div class="table-toolbar">
+
+                <h2>Student List</h2>
+
+                <input
+                    type="search"
+                    id="studentListSearch"
+                    placeholder="Search students..."
+                    aria-label="Search students">
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Program</th>
+                            <th>Year Level</th>
+                            <th>Section</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentsListBody">
+
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                No student records available.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p id="studentsMessage" role="status"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ADD STUDENT MODAL -->
+    <div
+        id="studentModal"
+        class="modal-overlay"
+        hidden>
+
+        <div
+            class="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="studentModalTitle">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="studentModalTitle">Add Student</h2>
+                    <p>Enter the student's information below.</p>
+                </div>
+
+                <button
+                    type="button"
+                    id="closeStudentModal"
+                    class="modal-close"
+                    aria-label="Close dialog">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+
+            <!-- STUDENT FORM -->
+            <form id="addStudentForm">
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label for="newStudentId">
+                            Student ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newStudentId"
+                            name="studentId"
+                            placeholder="Enter student ID"
+                            required>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="newStudentName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newStudentName"
+                            name="fullName"
+                            placeholder="Enter full name"
+                            required>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="newStudentEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="newStudentEmail"
+                            name="email"
+                            placeholder="Enter email address"
+                            required>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="newStudentProgram">
+                            Program
+                        </label>
+
+                        <select
+                            id="newStudentProgram"
+                            name="program"
+                            required>
+
+                            <option value="">Select Program</option>
+                            <option value="BSIT">BSIT</option>
+                            <option value="BSCS">BSCS</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="newStudentYear">
+                            Year Level
+                        </label>
+
+                        <select
+                            id="newStudentYear"
+                            name="yearLevel"
+                            required>
+
+                            <option value="">Select Year Level</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="newStudentSection">
+                            Section
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newStudentSection"
+                            name="section"
+                            placeholder="Enter section"
+                            required>
+                    </div>
+
+                </div>
+
+
+                <!-- FORM MESSAGE -->
+                <p
+                    id="studentFormMessage"
+                    role="status"
+                    aria-live="polite">
+                </p>
+
+
+                <!-- FORM BUTTONS -->
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        id="cancelStudentBtn"
+                        class="secondary-button">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button">
+
+                        Save Student
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="app.js"></script>
+
+</body>
+</html>

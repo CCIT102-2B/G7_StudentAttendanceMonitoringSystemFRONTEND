@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance | AttendTrack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="dashboard-navbar">
+        <a href="dashboard.html" class="logo">AttendTrack</a>
+        <nav class="dashboard-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="attendance.html" class="active">Attendance</a>
+            <a href="students.html">Students</a>
+            <a href="records.html">Records</a>
+            <a href="reports.html">Reports</a>
+        </nav>
+        <a href="index.html" class="dashboard-logout">Logout</a>
+    </header>
+
+    <main class="page-container">
+        <div class="page-heading">
+            <div>
+                <h1>Student Attendance</h1>
+                <p>Record and manage daily attendance.</p>
+            </div>
+        </div>
+
+        <section class="filter-panel">
+            <label for="attendanceDate">Attendance Date</label>
+            <input type="date" id="attendanceDate">
+            <input type="search" id="attendanceSearch"
+                   placeholder="Search student..." aria-label="Search student">
+            <button type="button" id="saveAttendanceBtn" class="primary-button">
+                Save Attendance
+            </button>
+        </section>
+
+        <section class="table-panel">
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Program</th>
+                            <th>Section</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                No student data available.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="attendanceMessage" role="status"></p>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

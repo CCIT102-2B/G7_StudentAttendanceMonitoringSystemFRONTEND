@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | AttendTrack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="dashboard-navbar">
+        <a href="dashboard.html" class="logo">AttendTrack</a>
+        <nav class="dashboard-nav">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="attendance.html">Attendance</a>
+            <a href="students.html">Students</a>
+            <a href="records.html">Records</a>
+            <a href="reports.html" class="active">Reports</a>
+        </nav>
+        <a href="index.html" class="dashboard-logout">Logout</a>
+    </header>
+
+    <main class="page-container">
+        <div class="page-heading">
+            <div>
+                <h1>Attendance Reports</h1>
+                <p>Review attendance summaries for a selected period.</p>
+            </div>
+            <button type="button" id="generateReportBtn" class="primary-button">
+                Generate Report
+            </button>
+        </div>
+
+        <section class="filter-panel">
+            <div class="filter-field">
+                <label for="reportFromDate">From</label>
+                <input type="date" id="reportFromDate">
+            </div>
+            <div class="filter-field">
+                <label for="reportToDate">To</label>
+                <input type="date" id="reportToDate">
+            </div>
+            <div class="filter-field">
+                <label for="reportProgram">Program</label>
+                <select id="reportProgram">
+                    <option value="">All Programs</option>
+                </select>
+            </div>
+            <button type="button" id="applyReportFilterBtn" class="secondary-button">
+                Apply Filter
+            </button>
+        </section>
+
+        <section class="report-summary-grid">
+            <article class="dashboard-stat-card">
+                <p>Total Students</p>
+                <h2 id="reportTotalStudents">—</h2>
+            </article>
+            <article class="dashboard-stat-card">
+                <p>Present</p>
+                <h2 id="reportPresent">—</h2>
+            </article>
+            <article class="dashboard-stat-card">
+                <p>Absent</p>
+                <h2 id="reportAbsent">—</h2>
+            </article>
+            <article class="dashboard-stat-card">
+                <p>Late</p>
+                <h2 id="reportLate">—</h2>
+            </article>
+        </section>
+
+        <section class="table-panel">
+            <div class="table-toolbar">
+                <h2>Student Attendance Summary</h2>
+                <input type="search" id="reportSearch"
+                       placeholder="Search student..." aria-label="Search reports">
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Program</th>
+                            <th>Present</th>
+                            <th>Absent</th>
+                            <th>Late</th>
+                            <th>Attendance Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                No report data available.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="reportMessage" role="status"></p>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
