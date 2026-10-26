@@ -1,11 +1,9 @@
-
 /* ==========================================
    STUDENT ATTENDANCE MONITORING SYSTEM
    COMPLETE STYLESHEET
 ========================================== */
 
 /* RESET */
-
 * {
     margin: 0;
     padding: 0;
@@ -70,7 +68,6 @@ button:disabled {
     cursor: not-allowed;
     opacity: 0.6;
 }
-
 
 /* ==========================================
    NAVIGATION
@@ -142,7 +139,6 @@ button:disabled {
     background: var(--primary-dark);
 }
 
-
 /* ==========================================
    SHARED BUTTONS
 ========================================== */
@@ -182,7 +178,6 @@ button:disabled {
     background: #f9fafb;
     border-color: #cbd5e1;
 }
-
 
 /* ==========================================
    LANDING PAGE - index.html
@@ -254,7 +249,6 @@ button:disabled {
     color: var(--text-secondary);
     font-size: 15px;
 }
-
 
 /* ==========================================
    LOGIN PAGE
@@ -382,13 +376,9 @@ button:disabled {
     margin-top: 5px;
 }
 
-
 /* ==========================================
    NEW MODERN LOGIN BUTTON
 ========================================== */
-
-/* Supports either .login-btn or a submit button
-   inside .login-box. */
 
 .login-box button[type="submit"],
 .login-box .login-btn,
@@ -396,27 +386,20 @@ button:disabled {
     width: 100%;
     min-height: 50px;
     padding: 14px 24px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-
     background: linear-gradient(135deg, #315eea, #1d4ed8);
     color: #ffffff;
-
     border: none;
     border-radius: 10px;
-
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.3px;
-
     box-shadow: 0 5px 14px rgba(37, 99, 235, 0.25);
-
     cursor: pointer;
-
     transition:
         background 0.25s ease,
         box-shadow 0.25s ease,
@@ -463,6 +446,107 @@ button:disabled {
     overflow-wrap: anywhere;
 }
 
+/* ==========================================
+   LOGIN OPTIONS: REMEMBER ME & FORGOT PASSWORD
+========================================== */
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 20px;
+    font-size: 13px;
+}
+
+.remember-me {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #374151;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.remember-me:hover {
+    color: var(--primary);
+}
+
+.remember-me input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    flex-shrink: 0;
+    display: grid;
+    place-content: center;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.remember-me input[type="checkbox"]::before {
+    content: "";
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.15s ease;
+}
+
+.remember-me input[type="checkbox"]:checked {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.remember-me input[type="checkbox"]:checked::before {
+    transform: rotate(45deg) scale(1);
+}
+
+.remember-me input[type="checkbox"]:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.2);
+    outline-offset: 3px;
+}
+
+.forgot-password {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.forgot-password:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.forgot-password:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+@media (max-width: 400px) {
+    .login-options {
+        gap: 8px;
+        font-size: 12px;
+    }
+
+    .remember-me {
+        gap: 6px;
+    }
+}
 
 /* ==========================================
    DASHBOARD
@@ -546,7 +630,6 @@ button:disabled {
     color: var(--text-secondary);
 }
 
-
 /* ==========================================
    PAGE HEADINGS
 ========================================== */
@@ -566,7 +649,6 @@ button:disabled {
 .page-heading .primary-button {
     flex-shrink: 0;
 }
-
 
 /* ==========================================
    FILTER PANELS
@@ -633,7 +715,6 @@ button:disabled {
 .filter-panel .secondary-button {
     flex-shrink: 0;
 }
-
 
 /* ==========================================
    TABLE PANELS
@@ -733,7 +814,6 @@ button:disabled {
     overflow-wrap: anywhere;
 }
 
-
 /* ==========================================
    STATUS BADGES
 ========================================== */
@@ -768,7 +848,6 @@ button:disabled {
     color: #475569;
     background: #f1f5f9;
 }
-
 
 /* ==========================================
    ADD STUDENT MODAL
@@ -873,7 +952,6 @@ button:disabled {
     overflow-wrap: anywhere;
 }
 
-
 /* ==========================================
    RESPONSIVE: TABLETS
 ========================================== */
@@ -912,7 +990,6 @@ button:disabled {
         padding-right: 7%;
     }
 }
-
 
 /* ==========================================
    RESPONSIVE: MOBILE
@@ -1060,7 +1137,6 @@ button:disabled {
         padding: 12px;
     }
 }
-
 
 /* ==========================================
    RESPONSIVE: SMALL MOBILE
