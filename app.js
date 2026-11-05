@@ -1145,137 +1145,211 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ======================================
-    // RECORDS PAGE
-    // ======================================
 
-    const recordsTableBody =
-        document.getElementById("recordsTableBody");
+// ======================================
+// RECORDS PAGE
+// ======================================
 
-    const recordsDateFilter =
-        document.getElementById("recordsDateFilter");
+const recordsTableBody =
+    document.getElementById("recordsTableBody");
 
-    const recordsStatusFilter =
-        document.getElementById("recordsStatusFilter");
+const recordsDateFilter =
+    document.getElementById("recordDateFilter");
 
-    if (recordsTableBody) {
-        loadRecords();
+const recordsSearch =
+    document.getElementById("recordSearch");
+
+let allAttendanceRecords = [];
+let allRecordStudents = [];
+
+if (recordsTableBody) {
+    loadRecords();
+}
+
+async function loadRecords() {
+    try {
+        recordsTableBody.innerHTML = `
+            <tr>
+                <td colspan="8" class="empty-state">
+                    Loading attendance records...
+                </td>
+            </tr>
+        `;
+
+        const [students, attendanceRecords] = await Promise.all([
+            getStudents(),
+            getAttendanceRecords()
+        ]);
+
+        allRecordStudents = students;
+        allAttendanceRecords = attendanceRecords;
+
+        renderRecords();
+
+    } catch (error) {
+        console.error("Records error:", error);
+
+        recordsTableBody.innerHTML = `
+            <tr>
+                <td colspan="8" class="empty-state">
+                    ${escapeHtml(error.message)}
+                </td>
+            </tr>
+        `;
+    }
+}
+
+function renderRecords() {
+    if (!recordsTableBody) return;
+
+    const dateFilter = recordsDateFilter?.value || "";
+    const searchTerm = recordsSearch?.value.trim().toLowerCase() || "";
+
+    let filteredRecords = [...allAttendanceRecords];
+
+    // DATE FILTER
+    if (dateFilter) {
+        filteredRecords = filteredRecords.filter(record =>
+            String(record.attendanceDate || "").startsWith(dateFilter)
+        );
     }
 
-    async function loadRecords() {
-        try {
-            const [students, attendanceRecords] = await Promise.all([
-                getStudents(),
-                getAttendanceRecords()
-            ]);
-
-            const dateFilter = recordsDateFilter?.value || "";
-            const statusFilter = recordsStatusFilter?.value || "";
-
-            let filteredRecords = attendanceRecords;
-
-            if (dateFilter) {
-                filteredRecords = filteredRecords.filter(record =>
-                    String(record.attendanceDate).startsWith(dateFilter)
-                );
-            }
-
-            if (statusFilter) {
-                filteredRecords = filteredRecords.filter(record =>
-                    record.status?.toLowerCase() === statusFilter.toLowerCase()
-                );
-            }
-
-            recordsTableBody.innerHTML = "";
-
-            if (!filteredRecords.length) {
-                recordsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="empty-state">
-                            No attendance records found.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            filteredRecords.sort((a, b) =>
-                new Date(b.attendanceDate) - new Date(a.attendanceDate)
+    // SEARCH FILTER
+    if (searchTerm) {
+        filteredRecords = filteredRecords.filter(record => {
+            const student = allRecordStudents.find(item =>
+                Number(item.id) === Number(record.studentId)
             );
 
-            filteredRecords.forEach(record => {
-                const student = students.find(item =>
-                    Number(item.id) === Number(record.studentId)
-                );
+            const studentId = student?.studentId || "";
+            const studentName = student
+                ? getStudentFullName(student)
+                : "Unknown Student";
 
-                const row = document.createElement("tr");
+            const program = student?.course || student?.program || "";
+            const status = record.status || "";
 
-                row.innerHTML = `
-                    <td>${formatDate(record.attendanceDate)}</td>
-                    <td>${escapeHtml(student?.studentId || "—")}</td>
-                    <td>${escapeHtml(
-                        student ? getStudentFullName(student) : "Unknown Student"
-                    )}</td>
-                    <td>${formatTime(record.timeIn)}</td>
-                    <td>${formatTime(record.timeOut)}</td>
-                    <td>
-                        <span class="status-badge ${getStatusClass(record.status)}">
-                            ${escapeHtml(record.status || "—")}
-                        </span>
-                    </td>
-                    <td>
-                        <button class="delete-record-btn"
-                            data-id="${record.id}">
-                            Delete
-                        </button>
-                    </td>
-                `;
+            const searchableText = [
+                studentId,
+                studentName,
+                program,
+                status
+            ].join(" ").toLowerCase();
 
-                recordsTableBody.appendChild(row);
-            });
-
-        } catch (error) {
-            console.error("Records error:", error);
-
-            recordsTableBody.innerHTML = `
-                <tr>
-                    <td colspan="7" class="empty-state">
-                        ${escapeHtml(error.message)}
-                    </td>
-                </tr>
-            `;
-        }
-    }
-
-    if (recordsDateFilter) {
-        recordsDateFilter.addEventListener("change", loadRecords);
-    }
-
-    if (recordsStatusFilter) {
-        recordsStatusFilter.addEventListener("change", loadRecords);
-    }
-
-    if (recordsTableBody) {
-        recordsTableBody.addEventListener("click", async function (event) {
-            const deleteButton =
-                event.target.closest(".delete-record-btn");
-
-            if (!deleteButton) return;
-
-            const id = deleteButton.dataset.id;
-
-            if (!confirm("Delete this attendance record?")) return;
-
-            try {
-                await deleteAttendance(id);
-                await loadRecords();
-
-                alert("Attendance record deleted successfully.");
-
-            } catch (error) {
-                alert(error.message);
-            }
+            return searchableText.includes(searchTerm);
         });
     }
+
+    // SORT BY DATE (NEWEST FIRST)
+    filteredRecords.sort((a, b) =>
+        new Date(b.attendanceDate) - new Date(a.attendanceDate)
+    );
+
+    recordsTableBody.innerHTML = "";
+
+    if (!filteredRecords.length) {
+        recordsTableBody.innerHTML = `
+            <tr>
+                <td colspan="8" class="empty-state">
+                    No attendance records found.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    filteredRecords.forEach(record => {
+        const student = allRecordStudents.find(item =>
+            Number(item.id) === Number(record.studentId)
+        );
+
+        const studentId = student?.studentId || "—";
+
+        const studentName = student
+            ? getStudentFullName(student)
+            : "Unknown Student";
+
+        const program = student?.course || student?.program || "—";
+
+        const timeIn = record.timeIn
+            ? formatTime(record.timeIn)
+            : "—";
+
+        const timeOut = record.timeOut
+            ? formatTime(record.timeOut)
+            : "—";
+
+        const status = record.status || "—";
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${formatDate(record.attendanceDate)}</td>
+
+            <td>${escapeHtml(studentId)}</td>
+
+            <td>${escapeHtml(studentName)}</td>
+
+            <td>${escapeHtml(program)}</td>
+
+            <td>${escapeHtml(timeIn)}</td>
+
+            <td>${escapeHtml(timeOut)}</td>
+
+            <td>
+                <span class="status-badge ${getStatusClass(status)}">
+                    ${escapeHtml(status)}
+                </span>
+            </td>
+
+            <td>
+                <button
+                    class="delete-record-btn"
+                    data-id="${record.id}">
+                    Delete
+                </button>
+            </td>
+        `;
+
+        recordsTableBody.appendChild(row);
+    });
+}
+
+// DATE FILTER EVENT
+if (recordsDateFilter) {
+    recordsDateFilter.addEventListener("change", renderRecords);
+}
+
+// SEARCH EVENT
+if (recordsSearch) {
+    recordsSearch.addEventListener("input", renderRecords);
+}
+
+// DELETE RECORD EVENT
+if (recordsTableBody) {
+    recordsTableBody.addEventListener("click", async function(event) {
+        const deleteButton =
+            event.target.closest(".delete-record-btn");
+
+        if (!deleteButton) return;
+
+        const id = deleteButton.dataset.id;
+
+        if (!confirm("Delete this attendance record?")) return;
+
+        try {
+            await deleteAttendance(id);
+
+            await loadRecords();
+
+            alert("Attendance record deleted successfully.");
+
+        } catch (error) {
+            console.error("Delete record error:", error);
+            alert(error.message);
+        }
+    });
+}
 
   
     // ======================================
