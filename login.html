@@ -1,49 +1,46 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Student Attendance Monitoring System</title>
+    <title>Login and Register | AttendTrack</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="login-page">
 
-    <div class="login-container">
+    <main class="auth-container">
 
-        <div class="login-brand">
-            <a href="index.html" class="back-home">← Back to Home</a>
+        <!-- LEFT SIDE: LOGIN -->
+        <section class="auth-panel login-panel">
 
-            <div class="brand-content">
-                <h1>AttendTrack</h1>
-
-                <h2>Student Attendance<br>Monitoring System</h2>
+            <div class="auth-welcome">
+                <h1>Hello, Bravehearts!</h1>
 
                 <p>
-                    Monitor attendance, manage student records,
-                    and keep track of attendance efficiently.
+                    If you already have an account,
+                    login here!
                 </p>
             </div>
-        </div>
 
-        <div class="login-section">
+            <div class="auth-form login-form-container">
 
-            <div class="login-box">
-
-                <div class="login-header">
-                    <h2>Welcome Back!</h2>
-                    <p>Please enter your account details to continue.</p>
-                </div>
+                <h2>Login</h2>
+                <p class="auth-subtitle">
+                    Welcome back! Sign in to continue.
+                </p>
 
                 <form id="loginForm">
 
                     <div class="input-group">
-                        <label for="email">Email</label>
+                        <label for="loginEmail">Email</label>
                         <input
                             type="email"
-                            id="email"
+                            id="loginEmail"
                             placeholder="Enter your email"
+                            autocomplete="username"
                             required
                         >
                     </div>
@@ -54,36 +51,110 @@
                             type="password"
                             id="password"
                             placeholder="Enter your password"
+                            autocomplete="current-password"
                             required
                         >
                     </div>
 
-                    <div class="login-options">
-                        <label class="remember-me">
-                            <input type="checkbox" id="rememberMe">
-                            Remember me
-                        </label>
+                    <button type="submit" class="login-btn">
+                        <span>Log In</span>
+                        <span class="login-arrow" aria-hidden="true">→</span>
+                    </button>
 
-                        <a href="#" class="forgot-password">
-                            Forgot Password?
-                        </a>
-                    </div>
-
-                   
-<button type="submit" class="login-btn">
-    <span>Log In</span>
-    <span class="login-arrow" aria-hidden="true">→</span>
-</button>
+                    <p
+                        id="loginMessage"
+                        role="status"
+                        aria-live="polite">
+                    </p>
 
                 </form>
 
             </div>
 
-        </div>
+        </section>
 
-    </div>
+
+        <!-- RIGHT SIDE: REGISTER -->
+        <section class="auth-panel register-panel">
+
+            <div class="register-form-container">
+
+                <h2>Register Here</h2>
+
+                <p class="auth-subtitle">
+                    Create your account to get started.
+                </p>
+
+                <form id="registerForm">
+
+                    <div class="input-group">
+                        <label for="registerUsername">Username</label>
+                        <input
+                            type="text"
+                            id="registerUsername"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="registerEmail">Email</label>
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="registerPassword">Password</label>
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="register-btn">
+                        Register
+                    </button>
+
+                    <p
+                        id="registerMessage"
+                        role="status"
+                        aria-live="polite">
+                    </p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
 
     <script src="app.js"></script>
-</body>
 
+    <script>
+        // Registration UI only.
+        // Connect this form to the registration API before using it.
+        document.getElementById("registerForm")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const message =
+                    document.getElementById("registerMessage");
+
+                message.textContent =
+                    "Registration is not connected to the API yet.";
+            });
+    </script>
+
+</body>
 </html>

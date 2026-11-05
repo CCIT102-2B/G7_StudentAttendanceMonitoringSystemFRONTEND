@@ -7,9 +7,14 @@
     <title>Attendance | AttendTrack</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+    <!-- NAVIGATION -->
     <header class="dashboard-navbar">
+
         <a href="dashboard.html" class="logo">AttendTrack</a>
+
         <nav class="dashboard-nav">
             <a href="dashboard.html">Dashboard</a>
             <a href="attendance.html" class="active">Attendance</a>
@@ -17,10 +22,16 @@
             <a href="records.html">Records</a>
             <a href="reports.html">Reports</a>
         </nav>
+
         <a href="index.html" class="dashboard-logout">Logout</a>
+
     </header>
 
+
+    <!-- MAIN CONTENT -->
     <main class="page-container">
+
+        <!-- PAGE HEADING -->
         <div class="page-heading">
             <div>
                 <h1>Student Attendance</h1>
@@ -28,40 +39,82 @@
             </div>
         </div>
 
+
+        <!-- ATTENDANCE FILTER -->
         <section class="filter-panel">
+
             <label for="attendanceDate">Attendance Date</label>
-            <input type="date" id="attendanceDate">
-            <input type="search" id="attendanceSearch"
-                   placeholder="Search student..." aria-label="Search student">
-            <button type="button" id="saveAttendanceBtn" class="primary-button">
+
+            <input
+                type="date"
+                id="attendanceDate"
+                required>
+
+            <input
+                type="search"
+                id="attendanceSearch"
+                placeholder="Search student..."
+                aria-label="Search student">
+
+            <button
+                type="button"
+                id="saveAttendanceBtn"
+                class="primary-button">
+
                 Save Attendance
+
             </button>
+
         </section>
 
+
+        <!-- ATTENDANCE TABLE -->
         <section class="table-panel">
+
             <div class="table-wrapper">
+
                 <table class="data-table">
+
                     <thead>
                         <tr>
                             <th>Student ID</th>
                             <th>Student Name</th>
                             <th>Program</th>
                             <th>Section</th>
+                            <th>Time In</th>
+                            <th>Time Out</th>
                             <th>Status</th>
                         </tr>
                     </thead>
+
                     <tbody id="attendanceTableBody">
+
                         <tr>
-                            <td colspan="5" class="empty-state">
-                                No student data available.
+                            <td colspan="7" class="empty-state">
+                                Loading student data...
                             </td>
                         </tr>
+
                     </tbody>
+
                 </table>
+
             </div>
-            <p id="attendanceMessage" role="status"></p>
+
+            <!-- ATTENDANCE MESSAGE -->
+            <p
+                id="attendanceMessage"
+                role="status"
+                aria-live="polite">
+            </p>
+
         </section>
+
     </main>
+
+
+    <!-- JAVASCRIPT -->
     <script src="app.js"></script>
+
 </body>
 </html>
