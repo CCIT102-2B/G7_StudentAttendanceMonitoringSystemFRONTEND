@@ -4,41 +4,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Attendance Monitoring System</title>
+    <title>AttendTrack | Login & Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header class="navbar">
-        <a href="index.html" class="logo">AttendTrack</a>
-        <nav class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-        </nav>
-        <a href="login.html" class="nav-button">Login</a>
-    </header>
+<body class="login-page">
 
-    <main class="hero">
-        <div class="hero-content">
-            <p class="tagline">ATTENDANCE MANAGEMENT</p>
-            <h1>Student Attendance<br><span>Monitoring System</span></h1>
-            <p class="description">
-                A centralized system for managing student attendance
-                and monitoring attendance records efficiently.
-            </p>
-            <a href="login.html" class="primary-button">Get Started</a>
-        </div>
+    <main class="auth-container" id="authContainer">
+
+        <!-- BLUE WELCOME PANEL -->
+        <section class="auth-welcome-panel">
+
+            <!-- REGISTER VIEW WELCOME -->
+            <div class="welcome-content" id="welcomeRegister">
+                <h1>Hello, Bravehearts!</h1>
+
+                <p>
+                    If you already have an account,
+                    log in here to access AttendTrack.
+                </p>
+
+                <button type="button" class="switch-btn" id="showLogin">
+                    Login
+                </button>
+            </div>
+
+            <!-- LOGIN VIEW WELCOME -->
+            <div class="welcome-content" id="welcomeLogin" hidden>
+                <h1>Hello, Bravehearts!</h1>
+
+                <p>
+                    If you don't have an account,
+                    join us today to access AttendTrack.
+                </p>
+
+                <button type="button" class="switch-btn" id="showRegister">
+                    Register
+                </button>
+            </div>
+
+        </section>
+
+        <!-- WHITE FORM PANEL -->
+        <section class="auth-form-panel">
+
+            <!-- LOGIN FORM -->
+            <div class="auth-form-content" id="loginView" hidden>
+
+                <h2>Login here</h2>
+
+                <form id="loginForm">
+
+                    <!-- EMAIL -->
+                    <div class="input-group">
+                        <label for="loginEmail">Email</label>
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <!-- REMEMBER ME AND FORGOT PASSWORD -->
+                    <div class="login-options">
+
+                        <label class="remember-me">
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                            >
+                            <span>Remember me</span>
+                        </label>
+
+                        <a
+                            href="#"
+                            id="forgotPasswordLink"
+                            class="forgot-password"
+                        >
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+                    <!-- LOGIN BUTTON -->
+                    <button type="submit" class="auth-submit-btn">
+                        Login →
+                    </button>
+
+                    <p id="loginMessage" role="status" aria-live="polite"></p>
+
+                </form>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div class="auth-form-content" id="registerView">
+
+                <h2>Register here</h2>
+
+                <form id="registerForm">
+
+                    <!-- USERNAME -->
+                    <div class="input-group">
+                        <label for="registerUsername">Username</label>
+                        <input
+                            type="text"
+                            id="registerUsername"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="input-group">
+                        <label for="registerEmail">Email</label>
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="input-group">
+                        <label for="registerPassword">Password</label>
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <!-- REGISTER BUTTON -->
+                    <button type="submit" class="auth-submit-btn">
+                        Register →
+                    </button>
+
+                    <p id="registerMessage" role="status" aria-live="polite"></p>
+
+                </form>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="auth-footer">
+                AttendTrack | Student Attendance Monitoring System
+            </div>
+
+        </section>
+
     </main>
 
-    <section id="about" class="content-section">
-        <h2>About the System</h2>
-        <p>Manage student attendance through one organized system.</p>
-    </section>
+    <!-- EXISTING JAVASCRIPT -->
+    <script src="app.js"></script>
 
-    <section id="features" class="content-section">
-        <h2>System Features</h2>
-        <p>Student management, attendance monitoring, records, and reports.</p>
-    </section>
+    <!-- LOGIN / REGISTER SWITCHING -->
+    <script>
+        const authContainer = document.getElementById("authContainer");
+
+        const welcomeRegister =
+            document.getElementById("welcomeRegister");
+
+        const welcomeLogin =
+            document.getElementById("welcomeLogin");
+
+        const loginView =
+            document.getElementById("loginView");
+
+        const registerView =
+            document.getElementById("registerView");
+
+        // SHOW LOGIN
+        document.getElementById("showLogin")
+            .addEventListener("click", function () {
+
+                authContainer.classList.add("show-login");
+
+                welcomeRegister.hidden = true;
+                welcomeLogin.hidden = false;
+
+                registerView.hidden = true;
+                loginView.hidden = false;
+            });
+
+        // SHOW REGISTER
+        document.getElementById("showRegister")
+            .addEventListener("click", function () {
+
+                authContainer.classList.remove("show-login");
+
+                welcomeLogin.hidden = true;
+                welcomeRegister.hidden = false;
+
+                loginView.hidden = true;
+                registerView.hidden = false;
+            });
+
+        // FORGOT PASSWORD LINK
+        document.getElementById("forgotPasswordLink")
+            .addEventListener("click", function (event) {
+
+                event.preventDefault();
+
+                alert("Forgot Password feature is not available yet.");
+            });
+    </script>
+
 </body>
 </html>
-

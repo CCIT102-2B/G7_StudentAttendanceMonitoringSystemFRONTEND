@@ -1,15 +1,28 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Dashboard | AttendTrack</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="dashboard-page">
+
+    <!-- ======================================
+         NAVIGATION
+    ======================================= -->
+
     <header class="dashboard-navbar">
-        <a href="dashboard.html" class="logo">AttendTrack</a>
+
+        <a href="dashboard.html" class="logo">
+            AttendTrack
+        </a>
+
         <nav class="dashboard-nav">
             <a href="dashboard.html" class="active">Dashboard</a>
             <a href="attendance.html">Attendance</a>
@@ -17,42 +30,138 @@
             <a href="records.html">Records</a>
             <a href="reports.html">Reports</a>
         </nav>
-        <a href="index.html" class="dashboard-logout">Logout</a>
+
+        <a href="index.html" class="dashboard-logout">
+            Logout
+        </a>
+
     </header>
 
+
+    <!-- ======================================
+         DASHBOARD CONTENT
+    ======================================= -->
+
     <main class="dashboard-container">
+
+        <!-- WELCOME SECTION -->
+
         <section class="dashboard-welcome">
+
             <div>
                 <p class="dashboard-label">OVERVIEW</p>
+
                 <h1>Dashboard</h1>
-                <p>View student attendance statistics and summaries.</p>
+
+                <p>
+                    View student attendance statistics and summaries.
+                </p>
             </div>
+
+            <div class="dashboard-date">
+                <p id="dashboardDate"></p>
+            </div>
+
         </section>
+
+
+        <!-- ======================================
+             STATISTICS CARDS
+        ======================================= -->
 
         <section class="dashboard-stats">
+
             <article class="dashboard-stat-card">
                 <p>Total Students</p>
-                <h2 id="totalStudents">—</h2>
+                <h2 id="totalStudents">0</h2>
             </article>
+
             <article class="dashboard-stat-card">
                 <p>Present Today</p>
-                <h2 id="presentToday">—</h2>
+                <h2 id="presentToday">0</h2>
             </article>
+
             <article class="dashboard-stat-card">
                 <p>Absent Today</p>
-                <h2 id="absentToday">—</h2>
+                <h2 id="absentToday">0</h2>
             </article>
+
             <article class="dashboard-stat-card">
                 <p>Late Today</p>
-                <h2 id="lateToday">—</h2>
+                <h2 id="lateToday">0</h2>
             </article>
+
         </section>
 
-        <section class="dashboard-panel">
-            <h2>Attendance Overview</h2>
-            <p id="attendanceRate">No attendance data available.</p>
+
+        <!-- ======================================
+             ATTENDANCE OVERVIEW
+        ======================================= -->
+
+        <section class="dashboard-panel chart-card">
+
+            <!-- CHART HEADER -->
+
+            <div class="chart-header">
+
+                <div>
+                    <h2>Attendance Overview</h2>
+
+                    <p>
+                        Daily attendance summary based on recorded data.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- ATTENDANCE RATE -->
+
+            <div class="attendance-summary">
+
+                <p id="attendanceRate">
+                    Loading attendance statistics...
+                </p>
+
+                <div class="dashboard-progress">
+                    <div id="attendanceProgress"></div>
+                </div>
+
+            </div>
+
+
+            <!-- ATTENDANCE CHART -->
+
+            <div class="chart-container">
+
+                <canvas id="attendanceChart"></canvas>
+
+            </div>
+
+
+            <!-- CHART MESSAGE -->
+
+            <p id="dashboardMessage" class="dashboard-message">
+                Loading attendance chart...
+            </p>
+
         </section>
+
     </main>
+
+
+    <!-- ======================================
+         JAVASCRIPT FILES
+    ======================================= -->
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Dashboard Statistics and Other Functions -->
     <script src="app.js"></script>
+
+    <!-- Dashboard Attendance Chart -->
+    <script src="chart.js"></script>
+
 </body>
 </html>
