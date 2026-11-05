@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance | AttendTrack</title>
     <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="layout.css">
 </head>
-
 <body>
+    <div style="padding:10px 4%;background:#eef3fb;display:flex;gap:14px;flex-wrap:wrap;font:14px Arial"><a href="programs.html">Programs</a><a href="academic-years.html">Academic Years</a><a href="enrollments.html">Enrollments</a><a href="sessions.html">Attendance Sessions</a><a href="rfid-simulator.html">RFID Simulator</a></div>
 
-    <!-- NAVIGATION -->
     <header class="dashboard-navbar">
-
         <a href="dashboard.html" class="logo">AttendTrack</a>
-
         <nav class="dashboard-nav">
             <a href="dashboard.html">Dashboard</a>
             <a href="attendance.html" class="active">Attendance</a>
@@ -22,16 +20,10 @@
             <a href="records.html">Records</a>
             <a href="reports.html">Reports</a>
         </nav>
-
         <a href="index.html" class="dashboard-logout">Logout</a>
-
     </header>
 
-
-    <!-- MAIN CONTENT -->
     <main class="page-container">
-
-        <!-- PAGE HEADING -->
         <div class="page-heading">
             <div>
                 <h1>Student Attendance</h1>
@@ -39,82 +31,42 @@
             </div>
         </div>
 
-
-        <!-- ATTENDANCE FILTER -->
         <section class="filter-panel">
-
             <label for="attendanceDate">Attendance Date</label>
-
-            <input
-                type="date"
-                id="attendanceDate"
-                required>
-
-            <input
-                type="search"
-                id="attendanceSearch"
-                placeholder="Search student..."
-                aria-label="Search student">
-
-            <button
-                type="button"
-                id="saveAttendanceBtn"
-                class="primary-button">
-
+            <input type="date" id="attendanceDate">
+            <input type="search" id="attendanceSearch"
+                   placeholder="Search student..." aria-label="Search student">
+            <button type="button" id="saveAttendanceBtn" class="primary-button">
                 Save Attendance
-
             </button>
-
         </section>
 
-
-        <!-- ATTENDANCE TABLE -->
         <section class="table-panel">
-
             <div class="table-wrapper">
-
                 <table class="data-table">
-
                     <thead>
                         <tr>
                             <th>Student ID</th>
                             <th>Student Name</th>
                             <th>Program</th>
                             <th>Section</th>
-                            <th>Time In</th>
-                            <th>Time Out</th>
                             <th>Status</th>
                         </tr>
                     </thead>
-
                     <tbody id="attendanceTableBody">
-
                         <tr>
-                            <td colspan="7" class="empty-state">
-                                Loading student data...
+                            <td colspan="5" class="empty-state">
+                                No student data available.
                             </td>
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </div>
-
-            <!-- ATTENDANCE MESSAGE -->
-            <p
-                id="attendanceMessage"
-                role="status"
-                aria-live="polite">
-            </p>
-
+            <p id="attendanceMessage" role="status"></p>
         </section>
-
     </main>
-
-
-    <!-- JAVASCRIPT -->
+    <script src="api.js"></script>
     <script src="app.js"></script>
-
+<script src="layout.js"></script>
 </body>
 </html>
