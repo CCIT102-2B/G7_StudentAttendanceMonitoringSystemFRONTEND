@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports | AttendTrack</title>
     <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="layout.css">
 </head>
 <body>
+    <div style="padding:10px 4%;background:#eef3fb;display:flex;gap:14px;flex-wrap:wrap;font:14px Arial"><a href="programs.html">Programs</a><a href="academic-years.html">Academic Years</a><a href="enrollments.html">Enrollments</a><a href="sessions.html">Attendance Sessions</a><a href="rfid-simulator.html">RFID Simulator</a></div>
+
     <header class="dashboard-navbar">
         <a href="dashboard.html" class="logo">AttendTrack</a>
         <nav class="dashboard-nav">
@@ -26,9 +29,8 @@
                 <h1>Attendance Reports</h1>
                 <p>Review attendance summaries for a selected period.</p>
             </div>
-            <button type="button" id="generateReportBtn" class="primary-button">
-                Generate Report
-            </button>
+            <button type="button" id="generateReportBtn" class="primary-button">Generate Report</button>
+            <button type="button" id="downloadCsvBtn" class="secondary-button">Export CSV</button>
         </div>
 
         <section class="filter-panel">
@@ -101,6 +103,8 @@
             <p id="reportMessage" role="status"></p>
         </section>
     </main>
+    <script src="api.js"></script>
     <script src="app.js"></script>
+<script src="layout.js"></script>
 </body>
 </html>
